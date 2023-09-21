@@ -1,14 +1,16 @@
-const http = require('http');
-const port = 3000;
+const fs = require('fs');
+const csv = require('csv-parser');
 
-const server = http.createServer((req, res) => {
-  // TODO: Send the ""Hello, world!"" response
+const csvFilePath = process.argv[2];
+const columnName = process.argv[3];
+
+let sum = 0;
+
+fs.createReadStream(csvFilePath)
+  .pipe(csv())
+  .on('data', (data) => {
+    // TODO: Add code to sum values in the specified column
+  })
+  .on('end', () => {
+    console.log(`The sum of ${columnName} is: ${sum}`);
 });
-
-server.listen(port, () => {
-  // TODO: Log a message to the console when the server starts listening on the port
-});
-
-// DO NOT EDIT BELOW THIS LINE
-
-module.exports = { server }
